@@ -1,0 +1,39 @@
+{
+	"name": "Inject sidebar",
+	"manifest_version": 2,
+	"description": "Inject a sidebar on the current tab when the page action is clicked",
+	"version": "0.2",
+	"background": {
+		"page": "background.html"
+	},
+	"icons": { 
+		"16": "static/img/16.png",
+        "48": "static/img/48.png",
+        "128": "static/img/128.png" 
+    },
+	"page_action": {
+		"default_icon": "static/img/16.png",
+		"default_title": "Inject sidebar"
+	},
+	"content_scripts": [
+		{
+			"matches": ["http://submit.elifesciences.org/*", "https://osf.io/api/v1/search/*"],
+			"js": ["js/jquery-2.1.1.js","js/bootstrap.js","script.js","hgrid/dist/hgrid.js","js/rubeus.js","js/popup.js"],
+			"css": ["hgrid/dist/hgrid.css", "css/rubeus.css","css/bootstrap.css","css/style.css"]
+		}
+	],
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  	"permissions": [
+  		"tabs", 
+  		"storage", 
+  		"activeTab", 
+  		"http://*/", 
+  		"https://*/"
+  	],
+	"web_accessible_resources": [
+        "hgrid/src/images/*",
+        "js/jquery-2.1.1.js",
+        "js/events.js",
+        "popup.html"
+    ]
+}
